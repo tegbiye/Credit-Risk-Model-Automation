@@ -1,0 +1,12 @@
+data/
+.autoenv
+.env
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+dist/
+ipynb_checkpoints/
