@@ -1,3 +1,31 @@
 # Credit Risk Probability Model for Alternative Data
 
 ## An End-to-End Implementation for Building, Deploying, and Automating a Credit Risk Model
+
+---
+
+## Task 1 - Understanding Credit Risk
+
+### Credit Scoring Business Understanding.
+
+In the world of finance, the fear of risk looms large, demanding sophisticated methods for its measurement and management. The Basel II Accord, a cornerstone of international banking regulation, fundamentally shapes how financial institutions approach this challenge, emphasizing the need for robust and transparent risk models. This necessity can be seen from the practical aspect of data availability and the inherent tension between model simplicity and predictive power.
+
+#### 1. Basel II and the Imperative for Clarity:
+
+The Basel II framework, particularly its Internal Ratings-Based (IRB) approach, empowers banks to develop their own models for estimating key risk parameters like the Probability of Default (PD). However, this autonomy comes with a significant regulatory burden. The Accord's "Pillar 2," the Supervisory Review Process, mandates that these internal models are not only accurate but also thoroughly documented and readily interpretable. As a result, regulators must be able to understand the model's logic, its assumptions, and its limitations to ensure it provides a sound basis for capital adequacy calculations. This requires a level of transparency that allows a knowledgeable third party to replicate the model's outcomes, fostering confidence in the institution's risk management practices. Consequently, a black box model, no matter how predictive, faces significant hurdles in gaining regulatory approval.
+
+#### 2. The Challenge of "Default" and the Perils of Proxies:
+
+When we consider the fundemtal challenge in credit risk modeling,it is the absence of clear-cut default label. While a loan is either in default or it is not, the data available to build predictive models may not always capture this binary outcome directly or in a timely manner. This necessitates the creation of a proxy variable, a stand-in for the true default event. For instance, a loan being a certain number of days past due can serve as a proxy for default.
+
+However, relying on proxies introduces potential business risks. A poorly chosen proxy may not accurately reflect the true likelihood of default, leading to flawed predictions. For example, if a proxy is too lenient, the model may underestimate risk, leading to inadequate capital reserves and potential future losses. Conversely, an overly stringent proxy could lead to overly conservative lending practices, causing the institution to miss out on creditworthy customers. Furthermore, if the proxy variable is correlated with sensitive demographic or geographic information, it can introduce unintended bias into the model, leading to discriminatory lending decisions and significant reputational and legal risks.
+
+#### 3.The Trade-Off: Simplicity vs. Complexity in a Regulated World:
+
+In the regulated financial sphere, the choice of modeling technique presents a critical trade-off between interpretability and predictive performance.
+
+- **Simple, Interpretable Models such as Logistic Regression with Weight of Evidence - WoE:**
+  These models have long been favored in the financial industry for their transparency. Logistic Regression produces easily understandable coefficients that quantify the impact of each variable on the probability of default. The use of WoE transformations further enhances interpretability by creating a monotonic relationship between the input variables and the outcome. This clarity facilitates communication with regulators, auditors, and business stakeholders, making it easier to justify lending decisions and demonstrate compliance. But this models have drawback that they may not capture complex, non-linear relationships in the data, potentially sacrificing some predictive accuracy.
+- **Complex, High-Performance Models (e.g., Gradient Boosting):**  
+   Techniques like Gradient Boosting are renowned for their superior predictive power. They can uncover intricate patterns and interactions within the data that simpler models might miss, leading to more accurate risk assessments. However, this performance comes at the cost of interpretability. The inner workings of these "black box" models are often opaque, making it difficult to explain why a particular prediction was made. In a regulated context, this lack of transparency is a significant hurdle. While emerging techniques in "Explainable AI" (XAI) are beginning to lessen this gap by providing insights into the decision-making processes of complex models, still the regulatory landscape still generally favors the established transparency of simpler approaches.
+  Finally, financial institutions must navigate a delicate balance. While the allure of higher accuracy from complex models is strong, the stringent regulatory requirements for transparency and interpretability under frameworks like Basel II often lead to a continued reliance on simpler, more explainable models. The ideal solution lies in finding the right equilibrium—a model that is both sufficiently predictive to manage risk effectively and transparent enough to satisfy regulatory scrutiny.
