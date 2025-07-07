@@ -29,3 +29,50 @@ In the regulated financial sphere, the choice of modeling technique presents a c
 - **Complex, High-Performance Models (e.g., Gradient Boosting):**  
    Techniques like Gradient Boosting are renowned for their superior predictive power. They can uncover intricate patterns and interactions within the data that simpler models might miss, leading to more accurate risk assessments. However, this performance comes at the cost of interpretability. The inner workings of these "black box" models are often opaque, making it difficult to explain why a particular prediction was made. In a regulated context, this lack of transparency is a significant hurdle. While emerging techniques in "Explainable AI" (XAI) are beginning to lessen this gap by providing insights into the decision-making processes of complex models, still the regulatory landscape still generally favors the established transparency of simpler approaches.
   Finally, financial institutions must navigate a delicate balance. While the allure of higher accuracy from complex models is strong, the stringent regulatory requirements for transparency and interpretability under frameworks like Basel II often lead to a continued reliance on simpler, more explainable models. The ideal solution lies in finding the right equilibrium—a model that is both sufficiently predictive to manage risk effectively and transparent enough to satisfy regulatory scrutiny.
+
+## Project Structure
+
+Credit-Risk-Model-Automation/
+├── .github/workflows/ci.yml # For CI/CD
+├── data/ # add this folder to .gitignore
+│ ├── raw/ # Raw data goes here
+│ └── processed/ # Processed data for training
+├── notebooks/
+│ └── README.md # Exploratory, one-off analysis
+├── scripts # Scripts goes here
+| ├── **init**.py
+├── src/
+│ ├── **init**.py
+│ └── api/
+│ └── **init**.py
+├── tests/
+| ├── **init**.py
+│ └── test_sample.py # Unit tests
+├── requirements.txt
+├── .gitignore
+├── LICENSE
+└── README.md
+
+## Getting Started
+
+1. Clone the repository
+
+- git clone http://github.com/tegbiye/Credit-Risk-Model-Automation.git
+- cd Credit-Risk-Model-Automation
+
+2. Create environment using venv
+   python -m venv .venv
+
+- Activate the environment
+
+  .venv\Scripts\activate
+
+  source .venv\bin\activate
+
+3. Install Dependencies
+
+pip install -r requirements.txt
+
+📜 License
+This project is licensed under the MIT License.
+Feel free to use, modify, and distribute with proper attribution.
