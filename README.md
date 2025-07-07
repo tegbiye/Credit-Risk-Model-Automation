@@ -32,6 +32,7 @@ In the regulated financial sphere, the choice of modeling technique presents a c
 
 ## Project Structure
 
+<pre>
 Credit-Risk-Model-Automation/
 ├── .github/workflows/ci.yml # For CI/CD
 ├── data/ # add this folder to .gitignore
@@ -52,6 +53,7 @@ Credit-Risk-Model-Automation/
 ├── .gitignore
 ├── LICENSE
 └── README.md
+</pre>
 
 ## Getting Started
 
