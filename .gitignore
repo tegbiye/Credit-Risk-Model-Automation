@@ -12,3 +12,5 @@ dist/
 ipynb_checkpoints/
 *.whl
 mlruns/
+.pytest_cache/
+*.coverage
