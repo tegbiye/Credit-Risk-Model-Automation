@@ -51,6 +51,22 @@ Credit-Risk-Model-Automation/
 ├── tests/
 |   ├── __init__.py
 │   └── test_sample.py # Unit tests
+=======
+├── .github/workflows/ci.yml # For CI/CD
+├── data/ # add this folder to .gitignore
+│ ├── raw/ # Raw data goes here
+│ └── processed/ # Processed data for training
+├── notebooks/
+│ └── README.md # Exploratory, one-off analysis
+├── scripts # Scripts goes here
+| ├── **init**.py
+├── src/
+│ ├── **init**.py
+│ └── api/
+│ └── **init**.py
+├── tests/
+| ├── **init**.py
+│ └── test_sample.py # Unit tests
 ├── requirements.txt
 ├── .gitignore
 ├── LICENSE
