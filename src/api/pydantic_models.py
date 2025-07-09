@@ -5,7 +5,7 @@ from typing import Optional
 class PredictionRequest(BaseModel):
     """
     Pydantic model for input data to the /predict endpoint.
-    Matches the 27 numeric feature columns expected by the model.
+    Matches the 29 numeric feature columns expected by the model.
     """
     Amount: float = Field(..., description="Transaction amount")
     Value: float = Field(..., description="Transaction value")
@@ -57,11 +57,14 @@ class PredictionRequest(BaseModel):
                                            description="One-hot encoded ProviderId_ProviderId_5")
     ProviderId_ProviderId_6: float = Field(..., ge=0, le=1,
                                            description="One-hot encoded ProviderId_ProviderId_6")
+    CountryCode: float = Field(...,
+                               description="Country code of the transaction")
+    PricingStrategy: float = Field(...,
+                                   description="Pricing strategy of the transaction")
 
 
 class PredictionResponse(BaseModel):
-    """
-    Pydantic model for the /predict endpoint response.
-    """
     risk_probability: float = Field(..., ge=0.0, le=1.0,
                                     description="Probability of high fraud risk")
+    is_high_risk: bool = Field(
+        ..., description="Whether the transaction is classified as high risk")
