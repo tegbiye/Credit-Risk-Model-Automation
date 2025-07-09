@@ -32,6 +32,14 @@ In the regulated financial sphere, the choice of modeling technique presents a c
 
 ## Task -2 Exploratory Data Analysis (EDA)
 
+After doing the exploratory data analysis the following key insights are observed
+
+**Top Insights made from EDA**
+
+- Dominance of Small Transactions: Most transactions are small (below 10K UGX), primarily in 'airtime' and 'financial_services', indicating a focus on mobile-related services.
+- Fraudulent Transactions are Rare but High-Value: Fraudulent transactions (FraudResult = 1) are a small fraction but involve significantly higher amounts (e.g., 700K, 725K UGX), suggesting a pattern of high-value fraud in 'financial_services'.
+- Strong Correlation Between Amount and Value: The near-perfect correlation (0.95) between Amount and Value indicates redundancy, suggesting Value could be dropped or used differently in modeling. - Skewed Distributions and Outliers: Both Amount and Value are right-skewed with significant outliers, which may require transformation (e.g., log-scaling) or special handling in modeling. - Temporal Patterns: Transaction volume shows periodic spikes, potentially tied to billing cycles or promotions, suggesting time-based features (e.g., hour, day) could enhance fraud detection.
+
 ## Project Structure
 
 <pre>
@@ -42,7 +50,16 @@ Credit-Risk-Model-Automation/
 │   └── processed/             # Processed data for training
 ├── notebooks/
 |   ├── README.md
+|   ├── 10-fe_proxy.ipynb     # Proxy variable FE pipeline
+|   ├── 10-fe.ipynb           # Feature Engineering pipeline
 │   └── 10-eda.ipynb          # Exploratory, one-off analysis
+├── scripts/
+|   ├── __init__.py 
+├── src/
+│   ├── __init__.py
+│   ├── data_processing.py     # Script for Data Processing (EDA)
+|   ├── data_processing_FE.py     # Feature Engineering (FE) 
+│   └── data_processing_FE_Proxy.py # Script Proxy FE 
 ├── src/
 │   ├── __init__.py
 │   ├── data_processing.py     # Script for Data Processing (EDA)
@@ -51,22 +68,6 @@ Credit-Risk-Model-Automation/
 ├── tests/
 |   ├── __init__.py
 │   └── test_sample.py # Unit tests
-=======
-├── .github/workflows/ci.yml # For CI/CD
-├── data/ # add this folder to .gitignore
-│ ├── raw/ # Raw data goes here
-│ └── processed/ # Processed data for training
-├── notebooks/
-│ └── README.md # Exploratory, one-off analysis
-├── scripts # Scripts goes here
-| ├── **init**.py
-├── src/
-│ ├── **init**.py
-│ └── api/
-│ └── **init**.py
-├── tests/
-| ├── **init**.py
-│ └── test_sample.py # Unit tests
 ├── requirements.txt
 ├── .gitignore
 ├── LICENSE
