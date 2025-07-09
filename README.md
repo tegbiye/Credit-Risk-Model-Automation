@@ -29,3 +29,107 @@ In the regulated financial sphere, the choice of modeling technique presents a c
 - **Complex, High-Performance Models (e.g., Gradient Boosting):**  
    Techniques like Gradient Boosting are renowned for their superior predictive power. They can uncover intricate patterns and interactions within the data that simpler models might miss, leading to more accurate risk assessments. However, this performance comes at the cost of interpretability. The inner workings of these "black box" models are often opaque, making it difficult to explain why a particular prediction was made. In a regulated context, this lack of transparency is a significant hurdle. While emerging techniques in "Explainable AI" (XAI) are beginning to lessen this gap by providing insights into the decision-making processes of complex models, still the regulatory landscape still generally favors the established transparency of simpler approaches.
   Finally, financial institutions must navigate a delicate balance. While the allure of higher accuracy from complex models is strong, the stringent regulatory requirements for transparency and interpretability under frameworks like Basel II often lead to a continued reliance on simpler, more explainable models. The ideal solution lies in finding the right equilibrium—a model that is both sufficiently predictive to manage risk effectively and transparent enough to satisfy regulatory scrutiny.
+
+## Task -2 Exploratory Data Analysis (EDA)
+
+After doing the exploratory data analysis the following key insights are observed
+
+**Top Insights made from EDA**
+
+- Dominance of Small Transactions: Most transactions are small (below 10K UGX), primarily in 'airtime' and 'financial_services', indicating a focus on mobile-related services.
+- Fraudulent Transactions are Rare but High-Value: Fraudulent transactions (FraudResult = 1) are a small fraction but involve significantly higher amounts (e.g., 700K, 725K UGX), suggesting a pattern of high-value fraud in 'financial_services'.
+- Strong Correlation Between Amount and Value: The near-perfect correlation (0.95) between Amount and Value indicates redundancy, suggesting Value could be dropped or used differently in modeling. - Skewed Distributions and Outliers: Both Amount and Value are right-skewed with significant outliers, which may require transformation (e.g., log-scaling) or special handling in modeling. - Temporal Patterns: Transaction volume shows periodic spikes, potentially tied to billing cycles or promotions, suggesting time-based features (e.g., hour, day) could enhance fraud detection.
+
+## Task-3 and Task-4: Feature Engineering & Proxy Variable Feature Engineering
+- Built a robust, automated, and reproducible data processing script which transforms raw data into model ready format
+- Done aggregating features
+- Extracted Features
+- Encoded Variables for the case of Categorical
+- Normalized and Standardized numerical Variables
+- Saved the processed dataset to be used for the model training
+For the case of FE
+- 2025-07-06 14:41:37,729 - INFO - Data processing complete. Output shape: (95662, 35)
+- 2025-07-06 14:42:37,774 - INFO - Processed data and target saved
+For the case of Proxy FE
+- 2025-07-06 15:06:43,319 - INFO - Assigning high-risk labels
+- 2025-07-06 15:06:44,757 - INFO - Proxy target variable added. Final shape: (95662, 36)
+
+## Task-5: Model Training
+
+After training with provided dataset using the pipeline the following log result found using the three models.
+
+Data shape: (95662, 36), Target shape: (95662, 1)
+Numeric columns for training: ['Amount', 'Value', 'TransactionHour', ..., 'ProviderId_ProviderId_6']
+Train shape: (76529, 27), Test shape: (19133, 27)
+Training LogisticRegression
+Best parameters for LogisticRegression: {'C': 1, 'penalty': 'l2'}
+Metrics for LogisticRegression: {'accuracy': 0.99, 'precision': 0.99, ‘f1’:0.99, ‘recall’:0.99, ‘roc_auc’:0.99}
+Training RandomForest
+Best parameters for RandomForest: {'n_estimators': 200, 'max_depth': 20, 'min_samples_split': 2}
+Metrics for RandomForest: {'accuracy': 0.98, 'precision': 0.95, ‘f1’: 0.95, ‘recall’:0.98, roc_auc: 0.98}
+Training GradientBoosting
+Best parameters for GradientBoosting: {'n_estimators': 200, 'learning_rate': 0.1, 'max_depth': 3}
+Metrics for GradientBoosting: {'accuracy': 0.95, 'precision': 0.92, ‘f1’: 0.95, ‘recall’:0.95, roc_auc: 0.95}
+Registered best model: Logistic Regression with F1 score: 0.99
+
+## Project Structure
+
+<pre>
+Credit-Risk-Model-Automation/
+├── .github/workflows/ci.yml   # For CI/CD
+├── data/                       # add this folder to .gitignore
+│   ├── raw/                   # Raw data goes here 
+│   └── processed/             # Processed data for training
+├── notebooks/
+|   ├── README.md
+|   ├── 10-fe_proxy.ipynb     # Proxy variable FE pipeline
+|   ├── 10-fe.ipynb           # Feature Engineering pipeline
+│   └── 10-eda.ipynb          # Exploratory, one-off analysis
+├── scripts/
+|   ├── __init__.py 
+├── src/
+│   ├── __init__.py
+│   ├── data_processing.py     # Script for Data Processing (EDA)
+|   ├── data_processing_FE.py     # Feature Engineering (FE)
+|   ├── data_processing_FE_Proxy.py # Script Proxy FE 
+|   ├── model_training.py           # Script Model Training 
+│   └── api/
+|       ├── main.py    # main app for api
+|       ├── pydantic_models.py  # Helper function
+│       └── __init__.py #
+├── tests/
+|   ├── __init__.py
+|   ├── test_model_training.py # unit tests
+│   └── test_sample.py         # Unit tests
+├── .dockerignore
+├── docker-compose.yml
+├── DockerFile
+├── requirements.txt
+├── .gitignore
+├── LICENSE
+└── README.md
+</pre>
+
+## Getting Started
+
+1. Clone the repository
+
+- git clone http://github.com/tegbiye/Credit-Risk-Model-Automation.git
+- cd Credit-Risk-Model-Automation
+
+2. Create environment using venv
+   python -m venv .venv
+
+- Activate the environment
+
+  .venv\Scripts\activate
+
+  source .venv\bin\activate
+
+3. Install Dependencies
+
+pip install -r requirements.txt
+
+📜 License
+This project is licensed under the MIT License.
+Feel free to use, modify, and distribute with proper attribution.
