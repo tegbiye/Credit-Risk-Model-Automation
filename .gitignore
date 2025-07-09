@@ -10,6 +10,6 @@ __pycache__/
 *.log
 dist/
 ipynb_checkpoints/
-*.whl
-.pytest_cache/
 mlruns/
+.pytest_cache/
+*.whl
