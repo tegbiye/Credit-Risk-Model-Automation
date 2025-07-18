@@ -76,9 +76,12 @@ Credit-Risk-Model-Automation/
 ├── src/
 │   ├── __init__.py
 │   ├── data_processing.py     # Script for Data Processing (EDA)
-|   ├── data_processing_FE.py     # Feature Engineering (FE)
-|   ├── data_processing_FE_Proxy.py # Script Proxy FE 
 |   ├── model_training.py           # Script Model Training 
+|   ├── data_processing_FE.py     # Feature Engineering (FE) 
+│   └── data_processing_FE_Proxy.py # Script Proxy FE 
+├── src/
+│   ├── __init__.py
+│   ├── data_processing.py     # Script for Data Processing (EDA)
 │   └── api/
 │       └── __init__.py #
 ├── tests/
