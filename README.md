@@ -60,17 +60,29 @@ For the case of Proxy FE
 After training with provided dataset using the pipeline the following log result found using the three models.
 
 Data shape: (95662, 36), Target shape: (95662, 1)
+
 Numeric columns for training: ['Amount', 'Value', 'TransactionHour', ..., 'ProviderId_ProviderId_6']
+
 Train shape: (76529, 27), Test shape: (19133, 27)
+
 Training LogisticRegression
-Best parameters for LogisticRegression: {'C': 1, 'penalty': 'l2'}
-Metrics for LogisticRegression: {'accuracy': 0.99, 'precision': 0.99, ‘f1’:0.99, ‘recall’:0.99, ‘roc_auc’:0.99}
+
+ Best parameters for LogisticRegression: {'C': 1, 'penalty': 'l2'}
+ 
+ Metrics for LogisticRegression: {'accuracy': 0.99, 'precision': 0.99, ‘f1’:0.99, ‘recall’:0.99, ‘roc_auc’:0.99}
+
 Training RandomForest
-Best parameters for RandomForest: {'n_estimators': 200, 'max_depth': 20, 'min_samples_split': 2}
-Metrics for RandomForest: {'accuracy': 0.98, 'precision': 0.95, ‘f1’: 0.95, ‘recall’:0.98, roc_auc: 0.98}
+
+ Best parameters for RandomForest: {'n_estimators': 200, 'max_depth': 20, 'min_samples_split': 2}
+ 
+ Metrics for RandomForest: {'accuracy': 0.98, 'precision': 0.95, ‘f1’: 0.95, ‘recall’:0.98, roc_auc: 0.98}
+ 
 Training GradientBoosting
-Best parameters for GradientBoosting: {'n_estimators': 200, 'learning_rate': 0.1, 'max_depth': 3}
-Metrics for GradientBoosting: {'accuracy': 0.95, 'precision': 0.92, ‘f1’: 0.95, ‘recall’:0.95, roc_auc: 0.95}
+
+ Best parameters for GradientBoosting: {'n_estimators': 200, 'learning_rate': 0.1, 'max_depth': 3}
+ 
+ Metrics for GradientBoosting: {'accuracy': 0.95, 'precision': 0.92, ‘f1’: 0.95, ‘recall’:0.95, roc_auc: 0.95}
+
 Registered best model: Logistic Regression with F1 score: 0.99
 
 ## Project Structure
