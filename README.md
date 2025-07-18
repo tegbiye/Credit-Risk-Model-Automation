@@ -40,6 +40,21 @@ After doing the exploratory data analysis the following key insights are observe
 - Fraudulent Transactions are Rare but High-Value: Fraudulent transactions (FraudResult = 1) are a small fraction but involve significantly higher amounts (e.g., 700K, 725K UGX), suggesting a pattern of high-value fraud in 'financial_services'.
 - Strong Correlation Between Amount and Value: The near-perfect correlation (0.95) between Amount and Value indicates redundancy, suggesting Value could be dropped or used differently in modeling. - Skewed Distributions and Outliers: Both Amount and Value are right-skewed with significant outliers, which may require transformation (e.g., log-scaling) or special handling in modeling. - Temporal Patterns: Transaction volume shows periodic spikes, potentially tied to billing cycles or promotions, suggesting time-based features (e.g., hour, day) could enhance fraud detection.
 
+
+## Task-3 and Task-4: Feature Engineering & Proxy Variable Feature Engineering
+- Built a robust, automated, and reproducible data processing script which transforms raw data into model ready format
+- Done aggregating features
+- Extracted Features
+- Encoded Variables for the case of Categorical
+- Normalized and Standardized numerical Variables
+- Saved the processed dataset to be used for the model training
+For the case of FE
+- 2025-07-06 14:41:37,729 - INFO - Data processing complete. Output shape: (95662, 35)
+- 2025-07-06 14:42:37,774 - INFO - Processed data and target saved
+For the case of Proxy FE
+- 2025-07-06 15:06:43,319 - INFO - Assigning high-risk labels
+- 2025-07-06 15:06:44,757 - INFO - Proxy target variable added. Final shape: (95662, 36)
+
 ## Task-5: Model Training
 
 After training with provided dataset using the pipeline the following log result found using the three models.
@@ -76,18 +91,20 @@ Credit-Risk-Model-Automation/
 ├── src/
 │   ├── __init__.py
 │   ├── data_processing.py     # Script for Data Processing (EDA)
+|   ├── data_processing_FE.py     # Feature Engineering (FE)
+|   ├── data_processing_FE_Proxy.py # Script Proxy FE 
 |   ├── model_training.py           # Script Model Training 
-|   ├── data_processing_FE.py     # Feature Engineering (FE) 
-│   └── data_processing_FE_Proxy.py # Script Proxy FE 
-├── src/
-│   ├── __init__.py
-│   ├── data_processing.py     # Script for Data Processing (EDA)
 │   └── api/
+|       ├── main.py    # main app for api
+|       ├── pydantic_models.py  # Helper function
 │       └── __init__.py #
 ├── tests/
 |   ├── __init__.py
 |   ├── test_model_training.py # unit tests
 │   └── test_sample.py         # Unit tests
+├── .dockerignore
+├── docker-compose.yml
+├── DockerFile
 ├── requirements.txt
 ├── .gitignore
 ├── LICENSE

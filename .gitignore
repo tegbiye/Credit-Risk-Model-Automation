@@ -13,3 +13,5 @@ ipynb_checkpoints/
 mlruns/
 .pytest_cache/
 *.whl
+*.coverage
+

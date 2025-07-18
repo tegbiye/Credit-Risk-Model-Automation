@@ -6,12 +6,19 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 import mlflow
 import mlflow.sklearn
+from mlflow.tracking import MlflowClient
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+# Set MLflow tracking URI
+MLFLOW_TRACKING_URI = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000")
+mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
+logger.info(f"MLflow tracking URI set to: {MLFLOW_TRACKING_URI}")
 
 
 def evaluate_model(y_true, y_pred, y_pred_proba=None):
@@ -187,9 +194,42 @@ def main():
                 mlflow.log_metric(metric_name, value)
             model_info = mlflow.sklearn.log_model(
                 best_model, f"{best_model_name}_best_model")
-            mlflow.register_model(model_info.model_uri, "FraudDetectionModel")
-            logger.info(
-                f"Registered best model: {best_model_name} with F1 score: {best_f1}")
+
+            # Register the model
+            client = MlflowClient()
+            try:
+                registered_model = client.create_registered_model(
+                    "FraudDetectionModel")
+                logger.info(
+                    f"Created new registered model: FraudDetectionModel")
+            except mlflow.exceptions.MlflowException as e:
+                if "RESOURCE_ALREADY_EXISTS" in str(e):
+                    logger.info(
+                        "Model FraudDetectionModel already exists, proceeding to create version")
+                else:
+                    raise
+
+            # Create a new model version
+            try:
+                model_version = client.create_model_version(
+                    name="FraudDetectionModel",
+                    source=model_info.model_uri,
+                    run_id=model_info.run_id
+                )
+                logger.info(f"Created model version: {model_version.version}")
+
+                # Transition to Production
+                client.transition_model_version_stage(
+                    name="FraudDetectionModel",
+                    version=model_version.version,
+                    stage="Production"
+                )
+                logger.info(
+                    f"Registered and transitioned model: {best_model_name} to Production with F1 score: {best_f1}")
+            except mlflow.exceptions.MlflowException as e:
+                logger.error(
+                    f"Failed to register or transition model: {str(e)}")
+                raise
 
         # Save processed data with CustomerId for downstream use
         data.to_csv(
