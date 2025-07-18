@@ -40,6 +40,7 @@ After doing the exploratory data analysis the following key insights are observe
 - Fraudulent Transactions are Rare but High-Value: Fraudulent transactions (FraudResult = 1) are a small fraction but involve significantly higher amounts (e.g., 700K, 725K UGX), suggesting a pattern of high-value fraud in 'financial_services'.
 - Strong Correlation Between Amount and Value: The near-perfect correlation (0.95) between Amount and Value indicates redundancy, suggesting Value could be dropped or used differently in modeling. - Skewed Distributions and Outliers: Both Amount and Value are right-skewed with significant outliers, which may require transformation (e.g., log-scaling) or special handling in modeling. - Temporal Patterns: Transaction volume shows periodic spikes, potentially tied to billing cycles or promotions, suggesting time-based features (e.g., hour, day) could enhance fraud detection.
 
+
 ## Task-3 and Task-4: Feature Engineering & Proxy Variable Feature Engineering
 - Built a robust, automated, and reproducible data processing script which transforms raw data into model ready format
 - Done aggregating features
